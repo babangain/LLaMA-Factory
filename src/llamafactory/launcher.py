@@ -11,10 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import torch
 from llamafactory.train.tuner import run_exp
 
-
+def get_device_count() -> int:
+    r"""
+    Gets the number of available GPU or NPU devices.
+    """
+    
+    if torch.cuda.is_available():
+        return torch.cuda.device_count()
+    else:
+        return 0
 def launch():
     run_exp()
 
